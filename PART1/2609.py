@@ -15,12 +15,15 @@ else:
     small_val = a
 
 remainder = large_val % small_val
+
 if(remainder == 0):
     gcd = small_val
 
 while(remainder != 0):
     gcd = remainder
-    remainder = small_val % remainder
+    large_val = small_val
+    small_val = remainder
+    remainder = large_val % small_val
 
 lcm = int(a * b / gcd)
 print(gcd)
