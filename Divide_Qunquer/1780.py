@@ -1,6 +1,7 @@
 def check(row, col, N):
     global minus_cnt, zero_cnt, one_cnt
     val = paper[row][col]
+    # 현재 종이의 색(val)과 다르면 9개로 분할하기
     for i in range(row, row+N):
         for j in range(col, col+N):
             if paper[i][j] != val:
@@ -15,6 +16,7 @@ def check(row, col, N):
                 check(row + (2 * N), col + N, N) # 9개로 쪼개었을때 (여덟번째)
                 check(row + (2 * N), col + (2 * N), N) # 9개로 쪼개었을때 (아홉번째)
                 return
+    # 현재 종이 색상에 따라 갯수 카운트
     if val == -1:
         minus_cnt += 1
     elif val == 0:
