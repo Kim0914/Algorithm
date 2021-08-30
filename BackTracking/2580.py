@@ -35,6 +35,7 @@ def dfs(index):
             print(*line)
         answer_flag = True
         return
+    
     print('index : ', end ='')
     print(index)
     i, j = zero_point[index] # 스도쿠에서 0인 좌표를 하나씩 가져온다
