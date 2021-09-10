@@ -1,7 +1,6 @@
 def solution(v):
     answer = []
 
-    
     x_cor = []
     y_cor = []
 
@@ -28,8 +27,3 @@ def solution(v):
     answer = [a,b]
 
     return answer
-
-v = [[1, 4], [3, 4], [3, 10]]
-
-res = solution(v)
-print(res)
