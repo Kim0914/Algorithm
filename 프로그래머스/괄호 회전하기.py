@@ -1,6 +1,3 @@
-s = "((("
-
-
 def check(li):
     stack = []
 
