@@ -1,2 +1,2 @@
 # BaekjoonStudy
-Baekjoon algorithm study
+Algorithm study
