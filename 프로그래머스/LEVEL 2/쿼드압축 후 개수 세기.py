@@ -2,13 +2,10 @@ answer = [0,0]
 
 def check(arr, start_i, start_j, cnt):
     val = arr[start_i][start_j] # 0 or 1
-    # print(val)
-    # print(answer)
     flag = True
 
     for i in range(start_i, start_i + cnt):
         for j in range(start_j, start_j + cnt):
-            # print(arr[i][j])
             if arr[i][j] != val:
                 flag = False
     
