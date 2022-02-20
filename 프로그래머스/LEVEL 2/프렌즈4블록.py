@@ -1,5 +1,8 @@
 def check(i,j, board):
     c = board[i][j]
+
+    if c == '.':
+        return False
     
     if  c == board[i][j+1] and c == board[i+1][j] and c == board[i+1][j+1]:
         return True
@@ -8,35 +11,49 @@ def check(i,j, board):
 
 def solution(m, n, board):
     answer = 0
-    flag = True
-        
-    checked = [['X'] * n for _ in range(m)]
-    
     # 전처리
     for i in range(len(board)):
         board[i] = list(board[i])
 
-    # 같은 캐릭터 체크
-    for i in range(m-1):
-        for j in range(n-1):
-            if check(i,j,board):
-                checked[i][j] = 'O'
-                checked[i+1][j] = 'O' 
-                checked[i][j+1] = 'O' 
-                checked[i+1][j+1] = 'O'
-                  
-    # 같은 캐릭터 제거
-    tmp = []
-    for j in range(n):
-        c_str = ''
-        for i in range(m):
-            if checked[i][j] == 'X':
-                c_str += board[i][j]
-                
-        while len(c_str) < n:
-            c_str += 'X'
-        tmp.append(c_str)
-    
-    
-    print(tmp)
+    while True:
+        checked = [[0] * n for _ in range(m)]
+
+        # 같은 캐릭터 체크
+        for i in range(m-1):
+            for j in range(n-1):
+                if check(i,j,board):
+                    checked[i][j] = 1
+                    checked[i+1][j] = 1
+                    checked[i][j+1] = 1
+                    checked[i+1][j+1] = 1
+
+        cnt = 0
+        for data in checked:
+            cnt += data.count(1)  
+
+        if cnt == 0:
+            break
+
+        answer += cnt
+
+        for j in range(n):
+            for i in range(m):
+                if checked[i][j] == 1:
+                    x, y = i, j
+                    while x >= 0:
+                        if x == 0:
+                            board[x][y] = '.'
+                            break
+                        else:
+                            board[x][y] = board[x-1][y]
+                            x = x - 1
     return answer
+
+print(solution(6, 6, ['IIIIOO', 'IIIOOO', 'IIIOOI', 'IOOIII', 'OOOIII', 'OOIIII']))
+
+'''
+CCBDE
+AAADE
+AAABF
+CCBBF
+'''
