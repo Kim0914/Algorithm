@@ -1,47 +1,22 @@
-channel = 100
-cnt = 0
+import sys
+input = sys.stdin.readline
+target = int(input())
+n = int(input())
+broken = list(map(int, input().split()))
 
-N = int(input())
-btn_cnt = int(input())
-num_list = [0,1,2,3,4,5,6,7,8,9]
-a = []
+# 현재 채널에서 + 혹은 -만 사용하여 이동하는 경우
+min_count = abs(100 - target)
 
-if btn_cnt > 0:
-    btn_list = [int(x) for x in input().split()]
-
-
-for num in btn_list:
-    if num in num_list:
-        num_list.remove(num)
+for nums in range(1000001):
+    nums = str(nums)
     
+    for j in range(len(nums)):
+        # 각 숫자가 고장났는지 확인 후, 고장 났으면 break
+        if int(nums[j]) in broken:
+            break
 
-N_list = list(map(int, str(N)))
+        # 고장난 숫자 없이 마지막 자리까지 왔다면 min_count 비교 후 업데이트
+        elif j == len(nums) - 1:
+            min_count = min(min_count, abs(int(nums) - target) + len(nums))
 
-
-for N_list_data in N_list:
-    if N_list_data in num_list:
-        a.append(str(N_list_data))
-    else:
-        tmp = 9
-        min_val = 0
-        for num_list_data in num_list:
-            diff = abs(num_list_data - N_list_data)
-            if diff < tmp:
-                tmp = diff
-                min_val = num_list_data
-        a.append(str(min_val))
-
-val = int("".join(a))
-
-cnt1 = len(a) + abs(N - val)
-cnt2 = abs(N - channel)
-
-if cnt1 <= cnt2:
-    cnt = cnt1
-else:
-    cnt = cnt2
-
-if N == channel:
-    print(0)
-else:
-    print(cnt)
+print(min_count)
